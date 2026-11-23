@@ -1,0 +1,13 @@
+{
+  "name": "shipcrew",
+  "owner": { "name": "Aivars Meijers" },
+  "description": "A crew of independent agents for building apps: one builds, another tests the running app, and every confirmed miss becomes a check.",
+  "plugins": [
+    {
+      "name": "shipcrew",
+      "source": "./plugins/shipcrew",
+      "description": "One agent builds, an independent one tests the real thing, and each confirmed miss becomes a check. For Claude Code and T3 Code.",
+      "version": "0.2.0"
+    }
+  ]
+}

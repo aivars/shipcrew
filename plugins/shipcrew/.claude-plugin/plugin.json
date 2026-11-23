@@ -1,0 +1,8 @@
+{
+  "name": "shipcrew",
+  "version": "0.2.0",
+  "description": "A crew of independent agents for building apps: one builds, another tests the running app, and every confirmed miss becomes a check.",
+  "author": { "name": "Aivars Meijers" },
+  "license": "MIT",
+  "keywords": ["agents", "qa", "verification", "multi-model", "ios", "swift", "web", "t3-code"]
+}
