@@ -6,14 +6,35 @@ One agent builds the change. A different agent, ideally a different model, tests
 
 ## Install
 
-In Claude Code:
+Works from any folder. Do the steps in order, and **paste one command at a time**, pressing Enter after each. Pasting both together breaks it.
+
+**Step 1.** Add the marketplace. Paste this, press Enter:
 
 ```
 /plugin marketplace add aivars/shipcrew
+```
+
+If a box titled "Add marketplace" opens and asks for a source, type only `aivars/shipcrew` and press Enter.
+
+**Step 2.** Install the plugin. Paste this, press Enter:
+
+```
 /plugin install shipcrew@shipcrew
 ```
 
-Then, in your project:
+**Step 3.** Load it. Paste this, press Enter (or restart Claude Code):
+
+```
+/reload-plugins
+```
+
+**Step 4.** Check it worked. Type `/shipcrew:` and you should see `setup`, `ship`, `qa` and `learn` in the list.
+
+Prefer menus? Run `/plugin`, add `aivars/shipcrew` as a marketplace, then pick **shipcrew** from the Discover tab.
+
+### First use
+
+Open Claude Code inside the project you want to build in, then run:
 
 ```
 /shipcrew:setup
@@ -26,6 +47,12 @@ After that:
 ```
 /shipcrew:ship add a dark mode toggle to settings
 ```
+
+### If something goes wrong
+
+- **"not a valid GitHub owner/repo shorthand":** two commands got pasted into one box. Clear it, type only `aivars/shipcrew`, and run the install command separately.
+- **`/shipcrew:` shows nothing:** run `/reload-plugins` or restart Claude Code.
+- **Update later:** `/plugin marketplace update shipcrew`.
 
 ## The loop
 
