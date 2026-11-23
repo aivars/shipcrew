@@ -1,4 +1,5 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "shipcrew",
   "owner": { "name": "Aivars Meijers" },
   "description": "A crew of independent agents for building apps: one builds, another tests the running app, and every confirmed miss becomes a check.",
