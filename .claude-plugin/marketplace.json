@@ -7,8 +7,7 @@
     {
       "name": "shipcrew",
       "source": "./plugins/shipcrew",
-      "description": "One agent builds, an independent one tests the real thing, and each confirmed miss becomes a check. For Claude Code and T3 Code.",
-      "version": "0.2.0"
+      "description": "One agent builds, an independent one tests the real thing, and each confirmed miss becomes a check. For Claude Code and T3 Code."
     }
   ]
 }

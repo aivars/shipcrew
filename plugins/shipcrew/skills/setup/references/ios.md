@@ -14,7 +14,9 @@ Prefer, in order:
 
 Copy `verify-ios.sh` to `.claude/skills/verify-<app>/scripts/verify.sh` and fill in the block at the top: bundle id, project or workspace, scheme, source paths, the arguments every launch needs, permissions to grant. `seed_app` is where seed files are copied into the app's container.
 
-It gives you `doctor`, `build`, `shoot <name> [--wait s] [--appearance light|dark] [--at lat,lon] [--text-size s] [--keep] -- <launch args>` and `cleanup`.
+It gives you `doctor`, `build`, `state`, `shoot <name> [--wait s] [--appearance light|dark] [--at lat,lon] [--text-size s] [--keep] -- <launch args>`, `replay [name ...]` and `cleanup [--delete]`.
+
+Each checkout gets its own simulator (`Verify-<app>-<hash of the repo path>`), and runs in one checkout take turns. `shoot` prints only the evidence path on stdout. A second shot with the same name is saved as `<name>-2.png`. `cleanup --delete` removes the simulator once a worktree is done.
 
 ## Gotchas already paid for
 

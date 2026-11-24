@@ -11,7 +11,7 @@ You did not write this change. Your job is to find where it fails to do what the
 
 - **Run it.** Read the diff to decide where to look, then drive the product with the repo's verify skill (`.claude/skills/verify-<project>/SKILL.md`). A finding from reading alone is a guess; leave it out.
 - **Evidence or nothing.** Each finding carries the exact command, what it produced (a screenshot you looked at, a log line, a response body, a failing test), and what the brief requires in its place.
-- **Change no source file.** No fixes, no refactors, no formatting. A failing test or a repro script may be the evidence; put it in a scratch folder.
+- **Change nothing in the checkout.** No fixes, no refactors, no formatting. A failing test or a repro script may be the evidence; put it outside the repo or in the verify skill's evidence folder. The builder compares the checkout's `state` before and after you, and any change voids the run.
 - **Stay on the brief.** Style, naming, structure and "this could break later" are out. A real bug outside the brief goes in a separate list.
 - **No findings is a valid result.** Do not pad.
 

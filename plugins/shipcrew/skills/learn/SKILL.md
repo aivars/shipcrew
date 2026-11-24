@@ -1,6 +1,6 @@
 ---
 name: learn
-description: Turn confirmed mistakes into checks so they cannot come back, and keep the repo's rule table. Use after QA findings, after the user corrects you, or for "learn from this", "make sure this never happens again".
+description: Turn confirmed mistakes into checks so they cannot come back, and keep the repo's rule table. Use when the ship skill hands over its kept findings, or when the user asks - "learn from this", "make sure this never happens again", /shipcrew:learn. It changes the repo, so do not start it unasked.
 ---
 
 # Learn

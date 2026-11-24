@@ -20,7 +20,10 @@ Thanks for helping. The plugin is small on purpose; these rules keep it that way
 
 ```
 claude plugin validate .
-bash -n plugins/shipcrew/skills/setup/references/verify-ios.sh
+shellcheck plugins/shipcrew/skills/setup/references/verify-ios.sh tests/*.sh
+bash tests/verify-ios.test.sh
 ```
+
+CI runs the same on every pull request. The tests stub `xcrun` and `xcodebuild`, so they need no Mac. On a Mac, also run them with `/bin/bash` (3.2), which is what users have.
 
 To try it locally: `/plugin marketplace add /path/to/your/clone`, then `/plugin install shipcrew@shipcrew`.

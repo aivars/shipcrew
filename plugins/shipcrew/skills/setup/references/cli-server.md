@@ -11,7 +11,11 @@ Run the real binary or the real server, never a function call into its internals
 - `doctor`: the build matches the checkout (commit plus a hash of uncommitted source), needed tools exist, the port is free.
 - `build`: build, then write the stamp.
 - `run <name> -- <command or request>`: start from a fresh temp directory or database. For a server, start it on its own port and wait until it answers. Run the command, then save stdout, stderr, the exit code and the relevant log lines to `<name>.txt`, plus a manifest line.
+- `state`: print the stamp of the checkout as it is now, untracked files included.
+- `replay [name ...]`: run each name again on the current build, with the arguments its manifest line recorded.
 - `cleanup`: stop what the script started, by saved process id. Remove temp data, keep evidence.
+
+Hold a lock per checkout for `build`, `run` and `replay`, and never overwrite evidence that already exists.
 
 ## Expect to handle
 

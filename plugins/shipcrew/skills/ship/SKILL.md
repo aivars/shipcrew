@@ -1,6 +1,6 @@
 ---
 name: ship
-description: Take a change from request to proven. One agent builds, an independent agent tests the real running app, and each confirmed miss becomes a check. Use for "ship this", "build this and test it", "run the crew on this", or any change that touches a screen, a flow or stored data.
+description: Take a change from request to proven. One agent builds, an independent agent tests the real running app, and each confirmed miss becomes a check. Use when the user asks for it - "ship this", "build this and test it", "run the crew on this", /shipcrew:ship - not on its own for an ordinary edit.
 ---
 
 # Ship
@@ -39,19 +39,23 @@ Drive the changed state with the verify skill and look at the evidence. If "done
 
 ## 5. Independent test
 
+First commit the change on its branch (a work-in-progress commit is fine), so the diff range is exact and a tester in another checkout builds the same code. Then save the output of the verify script's `state` command.
+
 Hand the tester four things: the brief, the diff range, the path to the repo's verify skill, and the absolute path to this plugin's `skills/qa/SKILL.md` (next to this skill's folder). Do not send your plan, your reasoning, or your own summary of the change.
 
 - **On T3 Code** (the `delegate_task` tool exists): start one child on the `tester` role's model, on a different provider than yours. Its task tells it to read the `qa` file first and follow it. A child on another provider cannot load a skill by name; it can read the file.
-- **In Claude Code:** start the plugin's `tester` agent. It starts with none of this session's context.
+- **In Claude Code:** start the plugin's `tester` agent, on the model of the roles file's `tester:` line when that names a Claude model. It starts with none of this session's context.
 - **Risk `high`:** add one more tester for each `second-opinion` line in the roles file. Each gets the same brief and diff and none of the others' findings. With no such line, say in the report that one model tested it.
 
 The tester never edits the code. It returns findings, each with the command it ran and what the run showed.
+
+When it returns, run `state` again. If it differs from what you saved, the tester changed the checkout: look with `git status` and `git diff`, undo it, and do not count that run. A tester in another checkout or on another machine keeps its evidence there; have it attach the files or copy them back, because a path you cannot open is not evidence in your report.
 
 ## 6. Fix rounds
 
 For each finding, rerun its command yourself. Keep it when the output shows the failure and the failure breaks "done means". Drop the rest and say why.
 
-Fix the kept findings, rerun steps 3 and 4, and send the tester only the new diff and the findings to recheck. Three rounds at most. If round three still has a kept finding, stop and take it to the user with the evidence: three rounds of patches usually mean the design is wrong, and a fourth patch will not fix that.
+Fix the kept findings and rerun steps 3 and 4. Then run the verify script's `replay` on this change's earlier runs, so the states that passed are checked again on the fixed build. Send the tester the new diff, the findings to recheck and the replay's evidence. Three rounds at most. If round three still has a kept finding, stop and take it to the user with the evidence: three rounds of patches usually mean the design is wrong, and a fourth patch will not fix that.
 
 ## 7. Report
 

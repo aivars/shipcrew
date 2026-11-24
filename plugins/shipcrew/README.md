@@ -8,6 +8,6 @@ A crew of independent agents for building apps: one builds, another tests the ru
 - `skills/ship`: runs a change through build, independent test and learn.
 - `skills/qa`: what the tester follows. Also usable on its own.
 - `skills/learn`: turns confirmed mistakes into checks and keeps `docs/agent-rules.md`.
-- `agents/tester`: the independent tester, with fresh context and no edit tools.
+- `agents/tester`: the independent tester, with fresh context and no edit tools. `ship` checks the checkout is unchanged after it reports.
 
 Install and usage are in the [repository README](../../README.md).

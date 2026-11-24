@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Give a repo a scripted way to run the real product and keep evidence, as a project skill with a feature map. Run once per project. Use for "set up shipcrew", "set up verification", or when a repo has no verify-<project> skill.
+description: Give a repo a scripted way to run the real product and keep evidence, as a project skill with a feature map. Run once per project. Use when the user asks - "set up shipcrew", "set up verification", /shipcrew:setup - or when the ship skill finds no verify-<project> skill.
 ---
 
 # Set up a project
@@ -34,13 +34,14 @@ For a draft recipe, write the script from its outline and tell the user this pat
 
 ## 3. Write the script
 
-One script with four commands: `doctor`, `build`, a drive command (`shoot` for anything with pixels, `run` otherwise) and `cleanup`. Whatever the platform, keep these properties:
+One script with these commands: `doctor`, `build`, `state` (prints the build stamp of the checkout as it is now), a drive command (`shoot` for anything with pixels, `run` otherwise), `replay` (runs recorded runs again on the current build) and `cleanup`. Whatever the platform, keep these properties:
 
-- **Its own sandbox:** a simulator, port, browser profile or temp database made for it and named for the project. It never touches one that other work is using.
-- **A build stamp:** the commit plus a hash of uncommitted source. The drive command refuses a build that does not match the checkout.
-- **A clean start per run** unless asked to keep data.
+- **Its own sandbox:** a simulator, port, browser profile or temp database made for it and named for the project and the checkout, so two worktrees never share one. It never touches one that other work is using.
+- **One run at a time:** a lock per checkout, so parallel testers queue instead of resetting each other's sandbox.
+- **A build stamp:** the commit plus a hash of uncommitted source, new untracked files included. The drive command refuses a build that does not match the checkout.
+- **A clean start per run** unless asked to keep data, including settings the sandbox keeps between runs (location, locale, cookies).
 - **A crash check** before evidence is taken.
-- **Evidence in a git-ignored folder** with one manifest line per run: name, time, build stamp, arguments.
+- **Evidence in a git-ignored folder**, never overwritten, with one manifest line per run: name, time, build stamp, and the arguments quoted so `replay` can run it again. Add the folder to `.gitignore`; `doctor` fails if it is not ignored.
 - **Cleanup** that stops only what the script started and never deletes evidence.
 
 ## 4. Write the skill
@@ -48,6 +49,8 @@ One script with four commands: `doctor`, `build`, a drive command (`shoot` for a
 `SKILL.md` with frontmatter (`name: verify-<project>`, a description that names the product and when to use it) and these sections, each with the repo's real commands: Launch, Doctor, Drive, Evidence, Cleanup, Not covered.
 
 In Evidence, state the proof standards: look at every piece of evidence you cite; a claim needs the state that shows it; say what the script cannot show.
+
+If agents that look in `.agents/skills/` (Codex) also work in the repo, link `.agents/skills/verify-<project>` to the same folder.
 
 ## 5. Seed the feature map
 
