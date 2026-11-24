@@ -43,7 +43,7 @@ Hand the tester four things: the brief, the diff range, the path to the repo's v
 
 - **On T3 Code** (the `delegate_task` tool exists): start one child on the `tester` role's model, on a different provider than yours. Its task tells it to read the `qa` file first and follow it. A child on another provider cannot load a skill by name; it can read the file.
 - **In Claude Code:** start the plugin's `tester` agent. It starts with none of this session's context.
-- **Risk `high`:** add a second tester on the `second-opinion` role when the roles file has one. Otherwise say in the report that one model tested it.
+- **Risk `high`:** add one more tester for each `second-opinion` line in the roles file. Each gets the same brief and diff and none of the others' findings. With no such line, say in the report that one model tested it.
 
 The tester never edits the code. It returns findings, each with the command it ran and what the run showed.
 
