@@ -1,6 +1,6 @@
 # shipcrew
 
-A crew of independent agents for building apps, as a plugin for Claude Code and [T3 Code](https://github.com/pingdotgg/t3code).
+A crew of independent agents for building mobile apps, as a plugin for Claude Code and [T3 Code](https://github.com/pingdotgg/t3code).
 
 One agent builds the change. A different agent, ideally a different model, tests the real running app without seeing the builder's reasoning. Every confirmed miss becomes a check in your repo, so the same mistake cannot come back.
 
@@ -85,16 +85,20 @@ In T3 Code the tester runs on another provider, since models from different make
 
 ## Platforms
 
-| Surface | State |
+shipcrew is made for mobile apps.
+
+| Platform | State |
 |---|---|
-| iOS app (simulator, launch arguments) | Proven on a shipping app. Script included. |
-| Web app | Draft recipe. No script yet. |
-| CLI or server | Draft recipe. No script yet. |
-| Android, macOS, others | Not written. |
+| iOS (simulator, launch arguments) | Proven on a shipping app. Script included. |
+| Android | Next. Not written yet. |
+
+Most apps also have a server or a website beside them. Setup has draft notes for those, so the tester can check them too, but nobody has run them yet.
 
 ## Status
 
-0.2.0, early. The iOS verification script has been run end to end on one shipping app. The full loop, with a second model as tester, has not yet been run on a real change. Expect rough edges and tell me about them.
+0.2.0, early. The full loop has run once on a real change to a shipping iOS app: Claude built it, GPT tested it on the simulator in a separate thread. The tester found two real bugs the builder had missed, one of them older than the change, and both fixes were confirmed by rerunning the tester's own scripts.
+
+Not tried yet: a second project, Android, and a tester on a second machine. Expect rough edges and tell me about them.
 
 ## Contributing
 
