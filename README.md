@@ -73,7 +73,7 @@ After that:
 | `/shipcrew:ship` | Run a change through the loop. |
 | `/shipcrew:qa` | What the tester follows. Also usable on its own on any change. |
 | `/shipcrew:learn` | Turn mistakes into checks and keep `docs/agent-rules.md`. |
-| `tester` agent | The independent tester in plain Claude Code: fresh context, cannot edit files. |
+| `tester` agent | The independent tester in plain Claude Code: fresh context, no edit tools, and `ship` checks the checkout is unchanged after it reports. |
 
 Everything it writes into your repo is plain files you own: a shell script, Markdown, and a rule table. Nothing runs in the background, and no hook changes your other sessions.
 
@@ -96,7 +96,7 @@ Most apps also have a server or a website beside them. Setup has draft notes for
 
 ## Status
 
-0.2.0, early. The full loop has run once on a real change to a shipping iOS app: Claude built it, GPT tested it on the simulator in a separate thread. The tester found two real bugs the builder had missed, one of them older than the change, and both fixes were confirmed by rerunning the tester's own scripts.
+0.3.0, early. See [CHANGELOG.md](CHANGELOG.md). The full loop has run once on a real change to a shipping iOS app: Claude built it, GPT tested it on the simulator in a separate thread. The tester found two real bugs the builder had missed, one of them older than the change, and both fixes were confirmed by rerunning the tester's own scripts.
 
 Not tried yet: a second project, Android, and a tester on a second machine. Expect rough edges and tell me about them.
 

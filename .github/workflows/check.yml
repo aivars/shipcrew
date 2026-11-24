@@ -1,0 +1,33 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Plugin and marketplace manifests
+        run: npx -y @anthropic-ai/claude-code@2.1.318 plugin validate .
+      - name: The version lives only in plugin.json
+        run: |
+          jq -e '[.plugins[] | has("version")] | any | not' .claude-plugin/marketplace.json
+          jq -e '.version' plugins/shipcrew/.claude-plugin/plugin.json
+      - name: shellcheck
+        run: shellcheck plugins/shipcrew/skills/setup/references/*.sh tests/*.sh
+
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      # On macOS this is /bin/bash 3.2, the shell users run the script with.
+      - run: /bin/bash tests/verify-ios.test.sh

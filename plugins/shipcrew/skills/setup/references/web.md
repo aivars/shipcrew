@@ -13,7 +13,11 @@ Nobody has run this recipe end to end yet. If you use it, send a pull request wi
 - `doctor`: dependencies installed, the dev build matches the checkout (same build stamp idea: commit plus a hash of uncommitted source), the port is free.
 - `build`: install and build, then write the stamp.
 - `shoot <name> [--viewport WxH] [--scheme light|dark] [--wait ms] <path>`: start the server on its own port with its own database or data folder, wait for it to answer, open the path in a fresh browser profile, fail on a page error or a 5xx, save a screenshot and a manifest line.
+- `state`: print the stamp of the checkout as it is now, untracked files included.
+- `replay [name ...]`: shoot each name again on the current build, with the arguments its manifest line recorded.
 - `cleanup`: stop the server the script started, by the process id it saved. Never kill by port or by name.
+
+Hold a lock per checkout for `build`, `shoot` and `replay`, and never overwrite a screenshot that already exists.
 
 ## Expect to handle
 
